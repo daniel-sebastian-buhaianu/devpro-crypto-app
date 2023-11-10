@@ -49,18 +49,18 @@ const globalSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getGlobalData.pending, (state) => {
-      state.isLoading = true;
-      state.hasError = false;
-    })
-    .addCase(getGlobalData.fulfilled, (state, action) => {
-      state.globalData = action.payload.data
-      state.isLoading = false;
-    })
-    .addCase(getGlobalData.rejected, (state, action) => {
-      state.isLoading = false;
-      state.hasError = true;
-      console.error("API call failed with error:", action.payload);
-    });
+        state.isLoading = true;
+        state.hasError = false;
+      })
+      .addCase(getGlobalData.fulfilled, (state, action) => {
+        state.globalData = action.payload.data
+        state.isLoading = false;
+      })
+      .addCase(getGlobalData.rejected, (state, action) => {
+        state.isLoading = false;
+        state.hasError = true;
+        console.error("API call failed with error:", action.payload);
+      });
   }
 });
 
