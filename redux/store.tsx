@@ -3,9 +3,11 @@
 import { useSelector, TypedUseSelectorHook } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import globalReducer from "@/redux/features/globalSlice";
+import currencyReducer from "@/redux/features/currencySlice";
 
 export const  store = configureStore({
   reducer: {
+    currency: currencyReducer,
     globalData: globalReducer
   },
 })
