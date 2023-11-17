@@ -1,4 +1,4 @@
-const TableSkeleton = () => {
+const CoinsTableSkeleton = () => {
   return (
     <>
       {[...Array(20)].map((index) => (
@@ -8,4 +8,4 @@ const TableSkeleton = () => {
   )
 }
 
-export default TableSkeleton;
+export default CoinsTableSkeleton;
