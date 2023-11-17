@@ -25,7 +25,7 @@ const CurrencySelector = () => {
       <button className="dark:bg-blackberry bg-lilac py-3 px-4 border border-1 dark:border-[#232336] border-lilac rounded-md flex items-center justify-between ml-4 min-w-[120px]"
               onClick={() => setShowDropdown(!showDropdown)}>
         <span className="w-[20px] h-[20px] dark:bg-white bg-indigo rounded-full text-[15px] text-plum flex justify-center items-center">
-          <CurrencyIcon currency={currency}/>
+          <CurrencyIcon currency={currency} inverted={true}/>
         </span>
         <span className="uppercase dark:text-white text-indigo mr-2">{currency}</span>
         <DropdownCaret className="stroke-indigo dark:stroke-white" />

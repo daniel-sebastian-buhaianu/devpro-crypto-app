@@ -7,6 +7,10 @@ const nextConfig = {
     });
     return config;
   },
+  images: {
+    domains: ['assets.coingecko.com'],
+  },
+  reactStrictMode: false,
 }
 
 module.exports = nextConfig
