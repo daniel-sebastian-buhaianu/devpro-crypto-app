@@ -27,7 +27,7 @@ const CoinsTable = () => {
   }, [inView]);
 
   const hasCoins: boolean = coins.length > 0 && !hasError;
-  const showSkeleton: boolean = loading === "pending" && !hasError;
+  const showSkeleton: boolean = coins.length === 0 && loading === "pending" && !hasError;
 
   return (
     <div>
