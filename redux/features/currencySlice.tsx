@@ -7,7 +7,7 @@ interface CurrencyState {
 }
 
 const initialState: CurrencyState = {
-  currency: "USD",
+  currency: "usd",
 };
 
 const currencySlice = createSlice({

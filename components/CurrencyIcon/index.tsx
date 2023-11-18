@@ -4,24 +4,25 @@ import EURIcon from "@/public/eur.svg";
 import JPYIcon from "@/public/jpy.svg";
 
 type CurrencyIconProps = {
-  currency: string,
+  currency: string;
+  inverted: boolean
 };
 
-const CurrencyIcon: React.FC<CurrencyIconProps>  = ({currency}) => {
+const CurrencyIcon: React.FC<CurrencyIconProps>  = ({currency, inverted}) => {
   let icon;
 
   switch (currency) {
-    case "USD":
-      icon = <USDIcon className="dark:fill-indigo fill-white w-4 h-4"/>;
+    case "usd":
+      icon = <USDIcon className={`w-4 h-4 ${inverted ? "dark:fill-indigo fill-white" : "fill-indigo dark:fill-white"}`} />;
       break;
-    case "EUR":
-      icon = <EURIcon className="dark:fill-indigo dark:stroke-indigo fill-white stroke-white w-3"/>;
+    case "eur":
+      icon = <EURIcon className={`${inverted ? "dark:fill-indigo dark:stroke-indigo fill-white stroke-white": "fill-indigo stroke-indigo dark:fill-white dark:stroke-white"} w-3`}/>;
       break;
-    case "JPY":
-      icon = <JPYIcon className="dark:fill-indigo dark:stroke-indigo fill-white stroke-white w-3"/>;
+    case "jpy":
+      icon = <JPYIcon className={`${inverted ? "dark:fill-indigo dark:stroke-indigo fill-white stroke-white": "fill-indigo stroke-indigo dark:fill-white dark:stroke-white"} w-3`}/>;
       break;
     default:
-      icon = <USDIcon className="dark:fill-indigo fill-white w-4 h-4"/>;
+      icon = <USDIcon className={`w-4 h-4 ${inverted ? "dark:fill-indigo fill-white" : "fill-indigo dark:fill-white"}`} />;
   }
   return (
     <>
