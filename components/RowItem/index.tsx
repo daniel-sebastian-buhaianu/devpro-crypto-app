@@ -3,6 +3,7 @@ import Image from "next/image";
 import MarketVolumeBar from "@/components/MarketVolumeBar";
 import PriceChange from "@/components/PriceChange";
 import CurrencyIcon from "@/components/CurrencyIcon";
+import CoinPriceChart from "@/components/CoinPriceChart";
 import { Coin } from "@/types";
 import formatNumber from "@/utils/formatNumber";
 import getPercentage from "@/utils/getPercentage";
@@ -42,8 +43,8 @@ const RowItem = ({coin, currency}: {coin: Coin, currency: string}) => {
         </div>
         <MarketVolumeBar fill="bg-apricot" percentage={getPercentage(coin.circulating_supply, coin.total_supply)}/>
       </div>
-      <div className="w-full max-w-[14%] text-center">
-        chart
+      <div className="w-full max-w-[14%] pl-3 text-center h-[50px]">
+        <CoinPriceChart prices={coin.sparkline_in_7d.price} priceChange={parseFloat(coin.price_change_percentage_7d_in_currency.toFixed(2))}/>
       </div>
     </div>
   )
