@@ -8,7 +8,13 @@ const nextConfig = {
     return config;
   },
   images: {
-    domains: ['assets.coingecko.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'assets.coingecko.com',
+        pathname: '**',
+      },
+    ],
   },
   reactStrictMode: false,
 }

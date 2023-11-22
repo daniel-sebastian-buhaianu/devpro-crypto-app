@@ -9,7 +9,7 @@ const CoinsTableHeading = () => {
       <span className="w-[7%] px-1">7d%</span>
       <span className="w-full max-w-[18%] px-1">24h volume/Market Cap</span>
       <span className="w-full max-w-[18%] px-1">Circulating/Total supply</span>
-      <span className="w-full max-w-[14%] text-center">Last 7d</span>
+      <span className="w-full max-w-[14%]">Last 7d</span>
     </div>
   )
 }
