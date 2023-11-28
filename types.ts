@@ -33,3 +33,29 @@ export interface Coin {
 export interface SparklineIn7d {
   price: number[];
 }
+
+export interface CoinData {
+  [index: string]: string | [string, number][];
+  id: string;
+  prices: [string, number][];
+  total_volumes: [string, number][];
+}
+
+export interface DataSet  {
+  labels: string[];
+  datasets: {
+    label?: string;
+    data: number[];
+    backgroundColor: string | CanvasGradient;
+    borderColor: string;
+    borderWidth: number;
+    fill: boolean;
+    order?: number;
+    tension?: number;
+    yAxisID?: string;
+  }[];
+}
+
+export interface ReduceByType {
+  [index: string]: number;
+}

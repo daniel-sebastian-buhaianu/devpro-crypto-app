@@ -1,10 +1,12 @@
-const getReducedArray = (array: number[], num: number): number[] => {
-  return array.reduce((accumulator: number[], currentValue: number, index: number) => {
-    if ((index + 1) % num === 0) {
-      accumulator.push(currentValue);
-    }
-    return accumulator;
-  }, []);
+type SimpleArray = number[];
+type TupleArray = [string, number][];
+
+const getReducedArray = (array: SimpleArray | TupleArray, num: number): SimpleArray | TupleArray => {
+  const lastIndex: number = array.length - 1;
+
+  return array.filter((_, index: number) => {
+    return index === 0 || index === lastIndex || (index + 1) % num === 0;
+  }) as SimpleArray | TupleArray;
 };
 
 export default getReducedArray;

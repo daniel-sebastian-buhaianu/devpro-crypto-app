@@ -11,7 +11,7 @@ import getFormattedPrice from "@/utils/getFormattedPrice";
 
 const CoinItem = ({coin, currency}: {coin: Coin, currency: string}) => {
   const dispatch: AppDispatch = useDispatch();
-  const { selectedCoins } = useAppSelector(state => state.selectedCoins);
+  const { selectedCoins, timeStamp } = useAppSelector(state => state.selectedCoins);
 
   const indexOfItem: number = selectedCoins.findIndex((item) => item.id === coin.id);
   const isSelected: boolean = indexOfItem !== -1;
@@ -21,7 +21,7 @@ const CoinItem = ({coin, currency}: {coin: Coin, currency: string}) => {
     if (isSelected) {
       dispatch(removeCoin(coin.id));
     } else if (selectedCoins.length < 3) {
-      dispatch(getCoinData({currency, days: "1", coinId: coin.id}));
+      dispatch(getCoinData({currency, timeStamp, coinId: coin.id}));
     }
   }
 

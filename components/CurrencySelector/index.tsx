@@ -31,7 +31,7 @@ const CurrencySelector = () => {
         <DropdownCaret className="stroke-indigo dark:stroke-white" />
       </button>
       {showDropdown && (
-        <div className="dark:bg-blackberry bg-lilac border border-1 dark:border-[#232336] border-lilac rounded-md ml-4 absolute right-0 overflow-hidden">
+        <div className="dark:bg-blackberry bg-lilac border border-1 dark:border-[#232336] border-lilac rounded-md ml-4 absolute right-0 overflow-hidden z-30">
           <button className="text-sm flex items-center py-1.5 px-4 hover:bg-grape w-full justify-between dark:text-white text-indigo" onClick={() => handleCurrency("usd")}>
             <USDIcon className="w-5 dark:fill-white fill-indigo"/> USD
           </button>
