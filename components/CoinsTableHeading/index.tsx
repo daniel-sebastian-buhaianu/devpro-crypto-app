@@ -1,6 +1,6 @@
 const CoinsTableHeading = () => {
   return (
-    <div className="mb-2 px-5 py-4 rounded-lg flex items-center text-sm dark:text-[#D1D1D1] text-[#424286]">
+    <div className="mb-4 px-5 py-4 rounded-lg flex items-center text-sm dark:text-[#D1D1D1] text-[#424286]">
       <span className="mr-2 w-[3%] text-center">#</span>
       <span className="px-1 w-[18%] ">Name</span>
       <span className="w-[7%] px-1 flex items-center">Price</span>

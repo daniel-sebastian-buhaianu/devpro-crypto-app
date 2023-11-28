@@ -28,7 +28,7 @@ const CoinPriceChart = ({prices, priceChange}: {prices: number[], priceChange: n
   const chartRef =  useRef<ChartJS<"line", number[], number>>(null);
   const { theme} = useTheme();
 
-  const dataSet: number[] = getReducedArray(prices, 6);
+  const dataSet = getReducedArray(prices, 6);
   const isPositive: boolean = priceChange >= 0;
 
   const data = {
