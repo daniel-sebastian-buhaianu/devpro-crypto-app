@@ -41,13 +41,13 @@ const CoinRow = ({bgColor, coinOptions, currentCoin, currency, amount, handleCoi
   return (
     <div className={`${bgColor} w-1/2 bg-white px-6 pt-6 pb-5 rounded-lg relative min-h-[140px] mr-2 last:mr-0 last:ml-2`}>
       <div className="flex justify-between">
-        <div className="w-[60%]  relative">
+        <div className="w-[60%] relative">
           {currentCoin && <Image src={currentCoin.image} alt={currentCoin.name} width={25} height={25} className="top-1/2 -translate-y-1/2 left-2 absolute"/>}
           <input className="bg-transparent placeholder:text-indigo dark:placeholder:text-white py-3 pl-10 pr-3 focus:outline-none rounded-md w-full"
                  onChange={handleSearchChange} value={coinSearch}
                  onFocus={() => setShowDropdown(true)}/>
         </div>
-        <input className="dark:bg-[#191932] bg-white placeholder:text-indigo dark:placeholder:text-white py-3 px-3 focus:outline-none w-[40%] text-right"
+        <input className="bg-transparent placeholder:text-indigo dark:placeholder:text-white py-3 px-3 focus:outline-none w-[40%] text-right"
           value={amount}
           onChange={handleAmountChange}/>
       </div>
