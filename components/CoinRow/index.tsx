@@ -4,9 +4,9 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import CurrencyIcon from "@/components/CurrencyIcon";
 import { Coin } from "@/types";
-import CaretIcon from "@/public/caret.svg";
 
 interface CoinRowProps {
+  bgColor: string;
   coinOptions: Coin[];
   currentCoin: Coin | null;
   currency: string;
@@ -15,7 +15,7 @@ interface CoinRowProps {
   handleAmountChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const CoinRow = ({coinOptions, currentCoin, currency, amount, handleCoinSelect, handleAmountChange}: CoinRowProps ) => {
+const CoinRow = ({bgColor, coinOptions, currentCoin, currency, amount, handleCoinSelect, handleAmountChange}: CoinRowProps ) => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [coinSearch, setCoinSearch] = useState('');
 
@@ -39,18 +39,15 @@ const CoinRow = ({coinOptions, currentCoin, currency, amount, handleCoinSelect, 
   }, [currentCoin]);
 
   return (
-    <div className="w-1/2 dark:bg-[#191932] bg-white px-6 pt-6 pb-5 rounded-lg relative min-h-[140px] mr-2 last:mr-0 last:ml-2">
+    <div className={`${bgColor} w-1/2 bg-white px-6 pt-6 pb-5 rounded-lg relative min-h-[140px] mr-2 last:mr-0 last:ml-2`}>
       <div className="flex justify-between">
-        <div className="w-[60%]  relative">
+        <div className="w-[60%] relative">
           {currentCoin && <Image src={currentCoin.image} alt={currentCoin.name} width={25} height={25} className="top-1/2 -translate-y-1/2 left-2 absolute"/>}
-          <input className="dark:bg-[#1d1d39] bg-white placeholder:text-indigo dark:placeholder:text-white py-3 pl-10 pr-3 focus:outline-none rounded-md w-full"
+          <input className="bg-transparent placeholder:text-indigo dark:placeholder:text-white py-3 pl-10 pr-3 focus:outline-none rounded-md w-full"
                  onChange={handleSearchChange} value={coinSearch}
                  onFocus={() => setShowDropdown(true)}/>
-          <button className="w-[25px] h-full flex items-center justify-end top-1/2 -translate-y-1/2 right-2 absolute" onClick={() => setShowDropdown(!showDropdown)}>
-            <CaretIcon className={`${showDropdown ? "" : "rotate-180"} w-[12px] h-[6px] fill-white`}/>
-          </button>
         </div>
-        <input className="dark:bg-[#191932] bg-white placeholder:text-indigo dark:placeholder:text-white py-3 px-3 focus:outline-none w-[40%] text-right"
+        <input className="bg-transparent placeholder:text-indigo dark:placeholder:text-white py-3 px-3 focus:outline-none w-[40%] text-right"
           value={amount}
           onChange={handleAmountChange}/>
       </div>

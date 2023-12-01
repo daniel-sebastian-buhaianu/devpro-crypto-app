@@ -49,7 +49,7 @@ const RowItem = ({coin, currency}: {coin: Coin, currency: string}) => {
         <MarketVolumeBar fill="bg-apricot" percentage={getPercentage(coin.circulating_supply, coin.total_supply)}/>
       </div>
       <div className="w-full max-w-[14%] pl-3 text-center h-[50px]">
-        <CoinPriceChart prices={coin.sparkline_in_7d.price} priceChange={priceChange7d}/>
+        <CoinPriceChart prices={coin.sparkline_in_7d.price} priceChange={priceChange7d} showDefaultColor={false} reduceBy={6}/>
       </div>
     </div>
   )

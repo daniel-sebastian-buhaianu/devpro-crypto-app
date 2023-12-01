@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useAppSelector } from "@/redux/store";
 import CoinRow from "@/components/CoinRow";
+import ConverterChart from "@/components/ConverterChart";
 import { Coin } from "@/types";
 import Switch from "@/public/switch.svg";
 
@@ -61,28 +62,33 @@ const Converter = () => {
   }
 
   return (
-    <div className="flex gap-3 mb-4 relative">
-      <CoinRow
-        currency={currency}
-        coinOptions={coins}
-        currentCoin={fromCoin}
-        amount={fromAmount}
-        handleCoinSelect={(coin: Coin) => setFromCoin(coin)}
-        handleAmountChange={(e) => handleAmountChange(e, true)}
-      />
-      <button className="dark:bg-white bg-lilac w-[40px] h-[40px] rounded-full absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-10 flex items-center justify-center"
-        onClick={handleCoinSwitch}>
-        <Switch width={25} height={25}/>
-      </button>
-      <CoinRow
-        currency={currency}
-        coinOptions={coins}
-        currentCoin={toCoin}
-        amount={toAmount}
-        handleCoinSelect={(coin: Coin) => setToCoin(coin)}
-        handleAmountChange={(e) => handleAmountChange(e, false)}
-      />
-    </div>
+    <>
+      <div className="flex gap-3 mb-8 relative">
+        <CoinRow
+          bgColor="dark:bg-[#191932]"
+          currency={currency}
+          coinOptions={coins}
+          currentCoin={fromCoin}
+          amount={fromAmount}
+          handleCoinSelect={(coin: Coin) => setFromCoin(coin)}
+          handleAmountChange={(e) => handleAmountChange(e, true)}
+        />
+        <button className="dark:bg-white bg-lilac w-[40px] h-[40px] rounded-full absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-10 flex items-center justify-center"
+          onClick={handleCoinSwitch}>
+          <Switch width={25} height={25}/>
+        </button>
+        <CoinRow
+          bgColor="dark:bg-[#1E1932]"
+          currency={currency}
+          coinOptions={coins}
+          currentCoin={toCoin}
+          amount={toAmount}
+          handleCoinSelect={(coin: Coin) => setToCoin(coin)}
+          handleAmountChange={(e) => handleAmountChange(e, false)}
+        />
+      </div>
+      {fromCoin !== null && toCoin !== null && <ConverterChart fromCoin={fromCoin} toCoin={toCoin}/>}
+    </>
   )
 }
 
