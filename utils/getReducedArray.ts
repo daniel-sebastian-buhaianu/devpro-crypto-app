@@ -1,12 +1,15 @@
 type SimpleArray = number[];
 type TupleArray = [string, number][];
 
-const getReducedArray = (array: SimpleArray | TupleArray, num: number): SimpleArray | TupleArray => {
+const getReducedArray = <T extends SimpleArray | TupleArray>(
+  array: T,
+  num: number
+): T => {
   const lastIndex: number = array.length - 1;
 
   return array.filter((_, index: number) => {
     return index === 0 || index === lastIndex || (index + 1) % num === 0;
-  }) as SimpleArray | TupleArray;
+  }) as T;
 };
 
 export default getReducedArray;

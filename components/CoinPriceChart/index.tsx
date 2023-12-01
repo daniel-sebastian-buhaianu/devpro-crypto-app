@@ -1,14 +1,11 @@
-"use client"
-
-import { useState, useEffect, useRef } from "react";
-import { useTheme } from "next-themes";
 import {
   Chart as ChartJS,
   CategoryScale,
   LinearScale,
   PointElement,
   LineElement,
-  Filler
+  Filler,
+  ScriptableContext
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import getNumArray from "@/utils/getNumArray";
@@ -22,22 +19,46 @@ ChartJS.register(
   Filler
 );
 
-const CoinPriceChart = ({prices, priceChange}: {prices: number[], priceChange: number}) => {
-  const [background, setBackground] = useState<CanvasGradient | string>("transparent");
-  const [borderColor, setBorderColor] = useState<string>("rgba(0,245,228,1)");
-  const chartRef =  useRef<ChartJS<"line", number[], number>>(null);
-  const { theme} = useTheme();
-
-  const dataSet = getReducedArray(prices, 6);
+const CoinPriceChart = ({prices, priceChange, showDefaultColor, reduceBy}: {prices: number[], priceChange: number, showDefaultColor: boolean, reduceBy: number}) => {
+  const dataSet: number[] = getReducedArray(prices, reduceBy);
   const isPositive: boolean = priceChange >= 0;
+
+  const getBorderColor = (): string => {
+    if (showDefaultColor) {
+      return "#7878FA";
+    } else if (isPositive) {
+      return "rgba(0,245,228,1)"
+    }
+    return "rgba(255,0,97,1)"
+  }
+
+  const getBackgroundColor = (context: ScriptableContext<"line">): CanvasGradient => {
+    const ctx: CanvasRenderingContext2D = context.chart.ctx;
+    const height: number = ctx.canvas.clientHeight;
+    const gradientFill: CanvasGradient = ctx.createLinearGradient(0, 0, 0, height);
+
+    if (showDefaultColor) {
+      gradientFill.addColorStop(0, "rgba(116, 116, 250, 0.5)");
+      gradientFill.addColorStop(0.7, "rgba(116, 116, 250, 0.1)")
+    } else if (isPositive) {
+      gradientFill.addColorStop(0, "rgba(0,245,228,.5)");
+      gradientFill.addColorStop(0.7, "rgba(0,245,228,.1)");
+    } else {
+      gradientFill.addColorStop(0, "rgba(255,0,97,.5)");
+      gradientFill.addColorStop(0.7, "rgba(255,0,97,.1)");
+    }
+
+    gradientFill.addColorStop(1, "transparent");
+    return gradientFill;
+  }
 
   const data = {
     labels: getNumArray(dataSet.length),
     datasets: [
       {
         data: dataSet,
-        backgroundColor: background,
-        borderColor: borderColor,
+        backgroundColor: getBackgroundColor,
+        borderColor: getBorderColor,
         borderWidth: 2,
         tension: 0.3,
         pointRadius: 0,
@@ -60,37 +81,8 @@ const CoinPriceChart = ({prices, priceChange}: {prices: number[], priceChange: n
     }
   };
 
-
-  const getThemeBg = (): string => {
-    if (theme === "dark") {
-      return "rgba(25,25,37,.2)";
-    } else {
-      return "rgba(255,255,255,.3)";
-    }
-  };
-
-  useEffect(() => {
-    if (chartRef.current) {
-      const ctx = chartRef.current.canvas.getContext("2d");
-
-      if (ctx) {
-        const gradient: CanvasGradient = ctx.createLinearGradient(0, 0, 0, 42);
-
-        if (isPositive) {
-          gradient.addColorStop(0, "rgba(0,245,228,.5)");
-        } else {
-          setBorderColor("rgba(255,0,97,1)");
-          gradient.addColorStop(0, "rgba(255,0,97,.5)");
-        }
-
-        gradient.addColorStop(1, getThemeBg());
-        setBackground(gradient);
-      }
-    }
-  },[theme])
-
   return (
-    <Line ref={chartRef} options={options} data={data} />
+    <Line options={options} data={data} />
   )
 }
 

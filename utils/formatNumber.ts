@@ -14,6 +14,10 @@ const lookup: LookupItem[] = [
 const noTrailingZeroRx: RegExp = /\.0+$|(\.[0-9]*[1-9])0+$/;
 
 const formatNumber = (num: number): string => {
+  if (num !== null && num < 1) {
+    return num.toFixed(3);
+  }
+
   const item: LookupItem | undefined = lookup.slice().reverse().find((item) => {
     return num >= item.value;
   });
