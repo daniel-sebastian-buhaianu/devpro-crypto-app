@@ -1,5 +1,6 @@
 
 import Image from "next/image";
+import Link from "next/link";
 import MarketVolumeBar from "@/components/MarketVolumeBar";
 import PriceChange from "@/components/PriceChange";
 import CurrencyIcon from "@/components/CurrencyIcon";
@@ -15,7 +16,7 @@ const RowItem = ({coin, currency}: {coin: Coin, currency: string}) => {
   const priceChange7d: number = getFormattedPrice(coin.price_change_percentage_7d_in_currency);
 
   return (
-    <div className="dark:bg-blackberry bg-white mb-2 p-5 rounded-lg flex items-center text-sm">
+    <Link href={`/coin/${coin.id}`} className="dark:bg-blackberry bg-white mb-2 p-5 rounded-lg flex items-center text-sm">
       <span className="mr-2 w-[3%] text-center">{coin.market_cap_rank}</span>
       <span className="px-1 w-[5%] ">
         <Image src={coin.image} alt={coin.name} width={30} height={30}/>
@@ -51,7 +52,7 @@ const RowItem = ({coin, currency}: {coin: Coin, currency: string}) => {
       <div className="w-full max-w-[14%] pl-3 text-center h-[50px]">
         <CoinPriceChart prices={coin.sparkline_in_7d.price} priceChange={priceChange7d} showDefaultColor={false} reduceBy={6}/>
       </div>
-    </div>
+    </Link>
   )
 }
 
