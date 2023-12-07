@@ -1,7 +1,7 @@
 "use client"
 
-import { useAppSelector } from "@/redux/store";
-import { useRef } from "react";
+import { AppDispatch, useAppSelector } from "@/redux/store";
+import { useEffect, useRef } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -17,6 +17,8 @@ import prepareChartData from "@/utils/prepareChartData";
 import CurrencyIcon from "@/components/CurrencyIcon";
 import { DataSet, Coin, CoinData } from "@/types";
 import formatNumber from "@/utils/formatNumber";
+import { getCoinData } from "@/redux/features/selectedCoinsSlice";
+import { useDispatch } from "react-redux";
 
 ChartJS.register(
   CategoryScale,
@@ -67,6 +69,7 @@ const coinBG: string[] = [
 ];
 
 const CoinCharts = () => {
+  const dispatch: AppDispatch = useDispatch();
   const { selectedCoins, timeStamp } = useAppSelector(state => state.selectedCoins);
   const { coins } = useAppSelector(state => state.coins);
   const { currency } = useAppSelector(state => state.currency);
@@ -93,6 +96,12 @@ const CoinCharts = () => {
     }
     return acc;
   } ,[])
+
+  useEffect(() => {
+    if (!selectedCoins.length) {
+      dispatch(getCoinData({currency, timeStamp, coinId: 'bitcoin'}));
+    }
+  }, []);
 
   return (
     <>
