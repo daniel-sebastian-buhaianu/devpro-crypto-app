@@ -23,7 +23,7 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
       setIsLoading(true);
       setHasError(false);
       const { data } = await axios(`https://api.coingecko.com/api/v3/coins/${params.id}?localization=false&tickers=false&market_data=true&community_data=true&developer_data=false&sparkline=true`);
-      const { data: newsData } = await axios(`https://newsapi.org/v2/everything?q=${params.id}&language=en&domains=coindesk.com,cointelegraph.com&pageSize=10&sortBy=popularity&apiKey=${process.env.NEXT_PUBLIC_NEWS_API_KEY}`)
+      const { data: newsData } = await axios(`https://newsapi.org/v2/everything?q=${params.id}&language=en&domains=coindesk.com,cointelegraph.com&pageSize=10&sortBy=popularity&apiKey=${process.env.NEWS_API_KEY}`)
       setNews(newsData.articles);
       setCoin(data);
       setIsLoading(false)

@@ -14,6 +14,9 @@ const nextConfig = {
       'www.coindesk.com',
     ],
   },
+  env: {
+    NEWS_API_KEY: process.env.NEWS_API_KEY
+  },
   reactStrictMode: false,
 }
 
