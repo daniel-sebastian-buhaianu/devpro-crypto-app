@@ -14,7 +14,7 @@ const Search = () => {
   const [coinSearch, setCoinSearch] = useState('');
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
   const router = useRouter();
-  const dropdownRef = useClickOutside(() => setShowDropdown(false));
+  const searchRef = useClickOutside(() => setShowDropdown(false));
 
   const getCoins = async () => {
     try {
@@ -55,7 +55,7 @@ const Search = () => {
   const coinResults: Coin[] = coins.filter((coin: Coin) => coin.name.toLowerCase().includes(coinSearch.toLowerCase()));
 
   return (
-    <div className="relative" ref={dropdownRef}>
+    <div className="relative" ref={searchRef}>
       <SearchIcon className="absolute top-1/2 -translate-y-1/2 left-3 dark:fill-[#D1D1D6] fill-indigo"/>
       <input placeholder="Search..."
              className="dark:bg-blackberry bg-lilac placeholder:text-indigo dark:placeholder:text-white py-3 pl-10 pr-3 border border-1 dark:border-[#232336] border-lilac rounded-md focus:outline-none min-w-[250px]"
