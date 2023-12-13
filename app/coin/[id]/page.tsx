@@ -15,7 +15,6 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
   const [hasError, setHasError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [coin, setCoin] = useState<CoinInfo | null>(null);
-  const [news, setNews] = useState<NewsItem[] | []>([]);
   const { currency} = useAppSelector(state => state.currency);
 
   const getCoinData = async () => {
@@ -23,8 +22,6 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
       setIsLoading(true);
       setHasError(false);
       const { data } = await axios(`https://api.coingecko.com/api/v3/coins/${params.id}?localization=false&tickers=false&market_data=true&community_data=true&developer_data=false&sparkline=true`);
-      const { data: newsData } = await axios(`https://newsapi.org/v2/everything?q=${params.id}&language=en&domains=coindesk.com,cointelegraph.com&pageSize=10&sortBy=popularity&apiKey=${process.env.NEWS_API_KEY}`)
-      setNews(newsData.articles);
       setCoin(data);
       setIsLoading(false)
     } catch (err) {
@@ -40,7 +37,6 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
   }, [params.id]);
 
   const hasCoin = !isLoading && !hasError && coin !== null;
-  const hasNews = !isLoading && !hasError && !!news.length;
 
   return (
     <div className="px-2 pb-14 pt-5 max-w-[1296px] w-full mx-auto">
@@ -138,29 +134,6 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
           <h2 className="text-3xl mt-8 mb-4">About</h2>
           <div className="w-full dark:bg-[#191932] bg-white px-6 py-6 rounded-lg">
             <div  className="text-sm" dangerouslySetInnerHTML={{__html: `${coin.description.en}`}} />
-          </div>
-        </>
-      )}
-      {hasNews && (
-        <>
-          <h2 className="text-3xl mt-8 mb-4">News</h2>
-          <div className="flex flex-wrap">
-            {news.map((item) => (
-              <div key={item.title} className="w-1/2 odd:pr-2 even:pl-2 py-2">
-                <div className="dark:bg-[#191932] bg-white rounded-lg h-full w-full px-4 py-4 flex">
-                  <div className="flex flex-col mr-3">
-                    <h2 className="mb-2">{item.title}</h2>
-                    <p className="text-xs mb-3 dark:text-[#D1D1D1] text-[#424286]"> {item.description}</p>
-                    <a href={item.url} target="_blank" className="text-grape mt-auto">Read more</a>
-                  </div>
-                  {item.urlToImage && (
-                    <div className="min-w-[150px]">
-                      <Image src={item.urlToImage} alt="news image" width={150} height={100} className="rounded-2xl"/>
-                    </div>
-                  )}
-                </div>
-              </div>
-            ))}
           </div>
         </>
       )}
