@@ -9,7 +9,7 @@ import PriceChange from "@/components/PriceChange";
 import CoinPriceChart from "@/components/CoinPriceChart";
 import formatDate from "@/utils/formatDate";
 import formatNumber from "@/utils/formatNumber";
-import { CoinInfo, NewsItem } from "@/types";
+import { CoinInfo } from "@/types";
 
 const CoinPage = ({ params }: { params: { id: string } }) => {
   const [hasError, setHasError] = useState(false);
